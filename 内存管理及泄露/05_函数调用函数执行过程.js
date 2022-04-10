@@ -8,4 +8,4 @@ function bar () {
     foo()
 }
 
-bar()
+bar() //Hello Global
