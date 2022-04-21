@@ -36,3 +36,20 @@ function composeFn2 (...fns) {
 }
 let compose2 = composeFn2(double, square)
 console.log(compose2(10));
+
+
+Function.prototype.bindDang = function (thisArg, ...args) {
+    let fn = this //foo
+    let fns = Symbol()
+    thisArg[fns] = fn
+    return function (...args2) {
+        thisArg[fns](...args, ...args2)
+        delete thisArg[fns]
+    }
+
+}
+function foo (num1, num2) {
+    console.log(this, num1 + num2);
+}
+let bar = foo.bindDang({ name: 'bo' }, 10)
+bar(20)

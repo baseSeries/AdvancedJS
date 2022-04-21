@@ -35,7 +35,7 @@ add4(10)
 // 接收一个函数 并且返回已经柯里化之后的函数
 function dangCurrying (fn) {
     // 需要返回一个函数
-    function curried (...args) {
+    return function curried (...args) {
         // 柯里化 函数必须要保证传入的函数的参数足够时才会执行
         // fn.length  就是函数所需参数
         if (args.length >= fn.length) {
@@ -56,7 +56,7 @@ function dangCurrying (fn) {
 
         }
     }
-    return curried
+
 
 }
 let curried = dangCurrying(add)
