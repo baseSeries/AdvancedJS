@@ -46,3 +46,21 @@ Object.defineProperty(obj1, "sex", {
     }
 })
 console.log(obj1);
+
+// 属性描述符获取
+Object.getOwnPropertyDescriptor(obj1, "sex")
+Object.getOwnPropertyDescriptors(obj1) //所有属性的描述符
+
+// 对象的方法
+let obj4 = {
+    name: "bo",
+}
+// 禁止对象添加新属性
+// Object.preventExtensions(obj)
+obj.height = 1.8
+
+// 禁止对象配置/删除里面的属性
+Object.seal(obj)
+
+// 属性冻结 不能修改
+Object.freeze(obj4)
