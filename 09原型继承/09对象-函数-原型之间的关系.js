@@ -12,3 +12,6 @@ let obj = { name: 'dang' }
 function Foo () {
 
 }
+//对象只有隐式的__proto__   函数既有隐式的__proto__ 也有显示的prototype
+let foo = new Foo();
+console.log(foo.__proto__ == Foo.prototype);
