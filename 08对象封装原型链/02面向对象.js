@@ -46,3 +46,34 @@ Object.defineProperty(obj1, "sex", {
     }
 })
 console.log(obj1);
+
+// 定义多个属性描述符
+let obj3 = {
+    get getAddress () {
+        return this._address
+    },
+    set setAddress (val) {
+        this._address = val
+    }
+}
+Object.defineProperties(obj3, {
+    _address: {
+        value: "北京",
+        writable: true,
+        configurable: false,
+        enumerable: false,
+    },
+    address: {
+        configurable: true, enumerable: true,
+        get () {
+            return this._address
+        },
+        set (value) {
+            this._address = value
+        }
+    }
+})
+console.log(obj3.address);
+obj3.address = "周口"
+console.log(obj3.address);
+console.log(obj3.address);
