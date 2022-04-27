@@ -47,6 +47,38 @@ Object.defineProperty(obj1, "sex", {
 })
 console.log(obj1);
 
+<<<<<<< HEAD
+// 定义多个属性描述符
+let obj3 = {
+    get getAddress () {
+        return this._address
+    },
+    set setAddress (val) {
+        this._address = val
+    }
+}
+Object.defineProperties(obj3, {
+    _address: {
+        value: "北京",
+        writable: true,
+        configurable: false,
+        enumerable: false,
+    },
+    address: {
+        configurable: true, enumerable: true,
+        get () {
+            return this._address
+        },
+        set (value) {
+            this._address = value
+        }
+    }
+})
+console.log(obj3.address);
+obj3.address = "周口"
+console.log(obj3.address);
+console.log(obj3.address);
+=======
 // 属性描述符获取
 Object.getOwnPropertyDescriptor(obj1, "sex")
 Object.getOwnPropertyDescriptors(obj1) //所有属性的描述符
@@ -64,3 +96,4 @@ Object.seal(obj)
 
 // 属性冻结 不能修改
 Object.freeze(obj4)
+>>>>>>> 23fab4a74381d2041c56f4b81148228b29250044
