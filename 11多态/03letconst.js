@@ -21,3 +21,19 @@ var test = 'test '
 
 }
 // if switch  for  都是快级作用域
+
+// 使用let const 定义到的循环 每次都会形成一个新的作用域 如果循环没有对】
+// 定义的变量做操作  可以使用 const
+// 暂时性死去  TDZ
+
+var foo1 = "foo"
+if (true) {
+    // 暂时性死区
+    // console.log(foo1);
+    let foo1 = "2"
+}
+function bar1 () {
+    // 暂时性死区
+    console.log(foo1);
+    let foo1 = foo
+}
