@@ -22,6 +22,24 @@ class Depend {
         this.reactiveFns.forEach(cb => cb())
     }
 }
+// 响应式函数返回
+function reactive (obj) {
+    return new Proxy(obj, {
+        get (target, key, receiver) {
+            let dep = getDepend(target, key)
+
+            // dep.addDepend(activeReactiveFn)
+            dep.depend()
+            return Reflect.get(target, key, receiver)
+        },
+        set (target, key, value, receiver) {
+            Reflect.set(target, key, value, receiver)
+            let dep = getDepend(target, key)
+
+            dep.notify()
+        }
+    })
+}
 // 创建依赖的数据结构  weakMap --> Map --name :fns
 const weakMap = new WeakMap()
 // 通过这个函数 设置dep  和获取dep
@@ -40,21 +58,7 @@ function getDepend (target, key) {
 }
 
 
-let proxyObj = new Proxy(obj, {
-    get (target, key, receiver) {
-        let dep = getDepend(target, key)
-
-        // dep.addDepend(activeReactiveFn)
-        dep.depend()
-        return Reflect.get(target, key, receiver)
-    },
-    set (target, key, value, receiver) {
-        Reflect.set(target, key, value, receiver)
-        let dep = getDepend(target, key)
-
-        dep.notify()
-    }
-})
+let proxyObj = reactive(obj)
 
 
 // 收集副作用函数
@@ -76,3 +80,10 @@ console.log("--------------------------");
 // 当属性修改的时候 遍历执行函数
 // proxyObj.name = "bob"
 proxyObj.age = 18
+
+
+let objFoo = reactive({ height: 188 })
+watchFn(() => {
+    console.log(objFoo.height);
+})
+objFoo.height = 199
