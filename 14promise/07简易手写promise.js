@@ -6,8 +6,8 @@
 
 */
 const PROMISE_STATUS_PENDING = "pending"
-const PROMISE_STATUS_RESOLVE = "resolve"
-const PROMISE_STATUS_REJECT = "reject"
+const PROMISE_STATUS_RESOLVE = "fulfilled"
+const PROMISE_STATUS_REJECT = "rejected"
 class MyPromise {
     constructor(executor) {
         this.status = PROMISE_STATUS_PENDING
@@ -45,6 +45,7 @@ class MyPromise {
     then (onFulfilled, onRejected) {
         onFulfilled && this.onFulfilledFns.push(onFulfilled)
         onRejected && this.onRejectedFns.push(onRejected)
+        // return new Promise(resolve, reject)
     }
 }
 
@@ -53,13 +54,14 @@ const myPromise = new MyPromise((resolve, reject) => {
     resolve("222")
     // reject("111")
 });
-myPromise.then((res) => {
-    console.log("resolve result: " + res);
-}, err => {
-    console.log("resolve reject: " + err);
-})
-myPromise.then((res) => {
-    console.log("resolve result2: " + res);
-}, err => {
-    console.log("resolve reject2: " + err);
-})
+
+// myPromise.then((res) => {
+//     console.log("resolve result: " + res);
+// }, err => {
+//     console.log("resolve reject: " + err);
+// })
+// myPromise.then((res) => {
+//     console.log("resolve result2: " + res);
+// }, err => {
+//     console.log("resolve reject2: " + err);
+// })
