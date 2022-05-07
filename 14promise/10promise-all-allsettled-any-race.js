@@ -133,7 +133,7 @@ class MyPromise {
     static race (promises) {
         return new MyPromise((resolve, reject) => {
             promises.forEach((promise, index) => {
-                promise.then(resolve, resolve)
+                promise.then(resolve, reject)
             })
         })
     }
