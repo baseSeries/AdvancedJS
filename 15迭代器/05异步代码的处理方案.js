@@ -69,6 +69,7 @@ const co = require('co')
 co(getData)
 
 // 5 async  await
+
 // function* getData () {
 //     const response = yield requestData("dangDang")
 //     const response2 = yield requestData(response + "aaa")
