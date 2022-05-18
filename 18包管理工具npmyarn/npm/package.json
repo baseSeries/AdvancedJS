@@ -8,5 +8,6 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "dang",
-	"license": "ISC"
+	"license": "ISC",
+	"browserslist": {}
 }
