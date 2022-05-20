@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            height: 3000px;
+            background: repeating-linear-gradient(red, green);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+
+    </div>
+    <script src="./debounce.js"> </script>
+    <script src="./throttle.js"></script>
+    <script>
+        // debounce
+        function scrollFn () {
+            console.log(window.scrollY);
+            return "result"
+        }
+        //通过回调 获取返回值
+        let debounceFn = debounce(scrollFn, 1000, true, (res) => {
+            console.log("result" + res);
+        })
+        // 通过promise获取返回值
+        const tempPromise = () => {
+            debounceFn().then(res => {
+                console.log("promise" + res);
+            })
+        }
+        // debounceFn.cancel() 取消最后未执行的防抖函数
+
+        // window.addEventListener("scroll", tempPromise)
+
+
+        let throttleFn = throttle(scrollFn, 2000)
+        window.addEventListener("scroll", throttleFn)
+    </script>
+</body>
+
+</html>
