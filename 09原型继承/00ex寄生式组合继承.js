@@ -67,3 +67,54 @@ console.log("address" in info);
 
 // instanceof
 // 用于检测构造函数的prototype 是否出现在某个实例对象的原型链上
+
+
+//
+{
+    function Animal (name) {
+        this.name = name;
+    }
+    Animal.prototype.getName = function () {
+        return this.name
+    }
+    function SubAnimal (name, age) {
+        Animal.call(this, name)
+        this.age = age
+    }
+    let APrototype = Animal.prototype
+    let Fn = function () {
+
+    }
+    Fn.prototype = APrototype
+    let ojb = new Fn()
+    SubAnimal.prototype = ojb
+    SubAnimal.prototype.constructor = SubAnimal
+
+    let subAnimal = new SubAnimal('bo', 18)
+    console.log(SubAnimal.prototype === Animal.prototype);
+    console.log(subAnimal.getName(), subAnimal.age);
+}
+{
+    function Animal (name) {
+        this.name = name;
+    }
+    Animal.prototype.getName = function () {
+        return this.name
+    }
+    function SubAnimal (name, age) {
+        Animal.call(this, name)
+        this.age = age
+    }
+    const geoPrototype = function (par) {
+        function Fn () { }
+        Fn.prototype = Object.create(par.prototype)
+        return new Fn()
+    }
+    const createPrototype = function (sub, par) {
+        let obj = geoPrototype(par)
+        sub.prototype = obj
+        sub.prototype.constructor = sub
+    }
+    createPrototype(SubAnimal, Animal)
+    console.log(SubAnimal.prototype);
+}

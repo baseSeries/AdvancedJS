@@ -53,3 +53,16 @@ function foo (num1, num2) {
 }
 let bar = foo.bindDang({ name: 'bo' }, 10)
 bar(20)
+
+let obj1 = { name: "dang", foo: function (arg) { return this.name + arg } }
+let obj2 = { name: 'bo' }
+Function.prototype.DangCall = function (thisArg, ...args) {
+    let fn = this
+    let fns = Symbol()
+    thisArg[fns] = fn
+    console.log(args);
+    let result = thisArg[fns](...args)
+    delete thisArg[fns]
+    return result
+}
+console.log(obj1.foo.DangCall(obj2, "1122"));
